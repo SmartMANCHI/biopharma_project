@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biopharma Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            margin-top: 20px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .section input, .section select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        .section button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .section button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Biopharma Project</h1>
+        <form action="/calculate" method="post">
+            <div class="section">
+                <h2>Centrifuge Inputs</h2>
+                <label for="pcv">PCV (%):</label>
+                <input type="number" step="0.01" id="pcv" name="pcv" required>
+                <label for="centrifuge_flush_volume">Centrifuge Flush Volume (L):</label>
+                <input type="number" step="0.01" id="centrifuge_flush_volume" name="centrifuge_flush_volume" required>
+                <label for="centrifuge_yield">Centrifuge Yield (%):</label>
+                <input type="number" step="0.01" id="centrifuge_yield" name="centrifuge_yield" required>
+                <label for="brx_titer">BRX Titer (g/L):</label>
+                <input type="number" step="0.01" id="brx_titer" name="brx_titer" required>
+                <label for="brx_volume">BRX Volume (L):</label>
+                <input type="number" step="1" id="brx_volume" name="brx_volume" required>
+            </div>
+            <div class="section">
+                <h2>Depth Filtration Inputs</h2>
+                <label for="filter_type">Filter Type:</label>
+                <select id="filter_type" name="filter_type" required>
+                    {% for filter_type in filter_types %}
+                        <option value="{{ filter_type }}">{{ filter_type }}</option>
+                    {% endfor %}
+                </select>
+                <label for="harvest_filter_loading_capacity">Harvest Filter Loading Capacity (L/m²):</label>
+                <input type="number" step="1" id="harvest_filter_loading_capacity" name="harvest_filter_loading_capacity" required>
+                <label for="harvest_depth_filtration_yield">Harvest Depth Filtration Yield (%):</label>
+                <input type="number" step="0.01" id="harvest_depth_filtration_yield" name="harvest_depth_filtration_yield" required>
+                <label for="harvest_filter_wfi_flux_requirement">Harvest Filter WFI Flux Requirement (LMH):</label>
+                <input type="number" step="1" id="harvest_filter_wfi_flux_requirement" name="harvest_filter_wfi_flux_requirement" required>
+                <label for="harvest_wfi_volume_per_filter">Harvest WFI Volume Per Filter (L/m²):</label>
+                <input type="number" step="1" id="harvest_wfi_volume_per_filter" name="harvest_wfi_volume_per_filter" required>
+                <label for="harvest_equilibration_volume_per_filter">Harvest Equilibration Volume Per Filter (L/m²):</label>
+                <input type="number" step="1" id="harvest_equilibration_volume_per_filter" name="harvest_equilibration_volume_per_filter" required>
+                <label for="harvest_chase_volume_per_filter">Harvest Chase Volume Per Filter (L/m²):</label>
+                <input type="number" step="1" id="harvest_chase_volume_per_filter" name="harvest_chase_volume_per_filter" required>
+                <label for="harvest_filter_process_flux_requirement">Harvest Filter Process Flux Requirement (LMH):</label>
+                <input type="number" step="1" id="harvest_filter_process_flux_requirement" name="harvest_filter_process_flux_requirement" required>
+            </div>
+            <div class="section">
+                <h2>Affinity Chromatography Inputs</h2>
+                <label for="desired_cycle_number">Desired Cycle Number (#):</label>
+                <input type="number" step="1" id="desired_cycle_number" name="desired_cycle_number" required>
+                <label for="ac_column_bh">AC Column Bed Height (cm):</label>
+                <input type="number" step="1" id="ac_column_bh" name="ac_column_bh" required>
+                <label for="ac_resin_capacity">AC Resin Capacity (g/L):</label>
+                <input type="number" step="1" id="ac_resin_capacity" name="ac_resin_capacity" required>
+                <label for="ac_resin_compression_factor">AC Resin Compression Factor:</label>
+                <input type="number" step="0.01" id="ac_resin_compression_factor" name="ac_resin_compression_factor" required>
+                <label for="ac_max_linear_flowrate">AC Max Linear Flowrate (cm/hr):</label>
+                <input type="number" step="1" id="ac_max_linear_flowrate" name="ac_max_linear_flowrate" required>
+                <label for="ac_cycle_eluate_cv">AC Cycle Eluate CV (#):</label>
+                <input type="number" step="0.1" id="ac_cycle_eluate_cv" name="ac_cycle_eluate_cv" required>
+                <label for="ac_yield">AC Yield (%):</label>
+                <input type="number" step="0.01" id="ac_yield" name="ac_yield" required>
+            </div>
+            <div class="section">
+                <h2>Viral Inactivation (VIN) Inputs</h2>
+                <label for="vin_acid_ratio">VIN Acid Ratio (%):</label>
+                <input type="number" step="0.01" id="vin_acid_ratio" name="vin_acid_ratio" required>
+                <label for="vin_base_ratio">VIN Base Ratio (%):</label>
+                <input type="number" step="0.01" id="vin_base_ratio" name="vin_base_ratio" required>
+                <label for="vin_yield">VIN Yield (%):</label>
+                <input type="number" step="0.01" id="vin_yield" name="vin_yield" required>
+                <label for="process_type">Process Type:</label>
+                <select id="process_type" name="process_type" required>
+                    <option value="separate">Separate Cycle</option>
+                    <option value="combined">Combined Cycle</option>
+                </select>
+            </div>
+            <div class="section">
+                <button type="submit">Calculate</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

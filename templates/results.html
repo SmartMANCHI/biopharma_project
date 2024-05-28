@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculation Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculation Results</h1>
+        <div class="section">
+            <h2>Centrifuge Results</h2>
+            <ul>
+                <li>Volume Removed by PCV: {{ results.volume_removed_by_pcv }} L</li>
+                <li>Centrifuge Volume Out: {{ results.centrifuge_volume_out }} L</li>
+                <li>Centrifuge Mass Out: {{ results.centrifuge_mass_out }} g</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Depth Filtration Results</h2>
+            <ul>
+                <li>Total Number of Harvest Filters Required: {{ results.total_number_harvest_filter_required }}</li>
+                <li>Total Harvest Filter Area Installed: {{ results.total_harvest_filter_area_installed }} m²</li>
+                <li>Harvest Depth Filtration Mass Out: {{ results.harvest_depth_filtration_mass_out }} g</li>
+                <li>Harvest Depth Filtration Volume Out: {{ results.harvest_depth_filtration_volume_out }} L</li>
+                <li>Number of Harvest Filter Racks Required: {{ results.number_harvest_filter_rack_required }}</li>
+                <li>Number of Filters on Each Rack: {{ results.number_of_filters_on_eachrack }}</li>
+                <li>Harvest Depth Filtration WFI Flowrate: {{ results.harvest_depth_filtration_wfi_flowrate }} L/hr</li>
+                <li>Harvest Depth Filtration Process Flowrate: {{ results.harvest_depth_filtration_process_flowrate }} L/hr</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Affinity Chromatography Results</h2>
+            <ul>
+                <li>AC Column Diameter: {{ results.ac_column_diameter }} cm</li>
+                <li>AC Column Volume: {{ results.ac_column_volume }} L</li>
+                <li>Max AC Volume Flowrate: {{ results.max_ac_volume_flowrate }} L/hr</li>
+                <li>AC Eluate Cycle Volume: {{ results.ac_eluate_cycle_volume }} L</li>
+                <li>AC Pool Volume: {{ results.ac_pool_volume }} L</li>
+                <li>AC Mass Out: {{ results.ac_mass_out }} g</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Skid Selection</h2>
+            <ul>
+                <li>Selected Skid Size: {{ results.selected_skid_size }}</li>
+                <li>Skid Material: {{ results.skid_material }}</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Viral Inactivation (VIN) Results</h2>
+            <ul>
+                <li>Total Acid Volume: {{ results.total_acid_volume }} L</li>
+                <li>Cycle Acid Volume: {{ results.cycle_acid_volume }} L</li>
+                <li>VIN Volume After Acid Addition: {{ results.vin_volume_after_acid_addition }} L</li>
+                <li>Total Base Volume: {{ results.total_base_volume }} L</li>
+                <li>Cycle Base Volume: {{ results.cycle_base_volume }} L</li>
+                <li>VIN Volume Out: {{ results.vin_volume_out }} L</li>
+                <li>VIN Mass Out: {{ results.vin_mass_out }} g</li>
+            </ul>
+        </div>
+        
+        <a href="/">Back to Input</a>
+    </div>
+</body>
+</html>
